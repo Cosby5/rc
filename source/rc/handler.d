@@ -16,6 +16,8 @@ version(unittest)
     import std.algorithm;
 }
 
+
+
 ///
 struct RCObject(T)
 {
@@ -119,7 +121,7 @@ struct RCObject(T)
     }
 
     ///
-    void opAssign(X=this)( auto ref RCObject!T r )
+    void opAssign(X=obj)( auto ref RCObject!T r )
     {
         version(rcdebugprint)
             writefln( "  opAssign %12s <- %12s", name, r.name );
@@ -131,7 +133,7 @@ struct RCObject(T)
     }
 
     ///
-    void opAssign(X=this)( auto ref T r )
+    void opAssign(X= obj)( auto ref T r )
     {
         version(rcdebugprint)
             writefln( "  opAssign %12s <- %12s", name, r.name );
@@ -218,7 +220,7 @@ struct RCArray(T)
     size_t opDollar() const @property { return work.length; }
 
     ///
-    void opAssign(X=this)( auto ref RCArray!T arr )
+    void opAssign(X=work)( auto ref RCArray!T arr )
     {
         decRef();
         init( arr.orig, arr.work );
